@@ -1,3 +1,3 @@
 # semver-test
 
-Test repository to test semver action
+Test repository to test semver action.
