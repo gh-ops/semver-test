@@ -1,0 +1,32 @@
+name: "units-test"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - develop
+      - 'releases/*'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    name: A sample job
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Get versions
+      uses: gh-ops/semver@v1.0.0
+      id: semver
+
+    - name: Dump versions
+      id: hello
+      run: |
+        echo "Latest Version: ${{ steps.semver.outputs.latest_version }}"
+        echo "Next Major: ${{ steps.semver.outputs.next_major }}"
+        echo "Next Minor: ${{ steps.semver.outputs.next_minor }}"
+        echo "Next Patch: ${{ steps.semver.outputs.next_patch }}"
